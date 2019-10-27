@@ -1,45 +1,45 @@
 ﻿<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
-<?php include '../classes/Category.php'; ?>
+<?php include '../classes/Brand.php'; ?>
 <?php
-   $cat = new Category();
+   $brand = new Brand();
    if(isset($_GET['delid'])){
       $id = $_GET['delid'];
-      $delcat = $cat->delCatById($id);
+      $delbrand = $brand->delBrandById($id);
    }  
  ?>
         <div class="grid_10">
             <div class="box round first grid">
             	<?php
-            	  if(isset($delcat)){
-            	  	echo $delcat;
+            	  if(isset($delbrand)){
+            	  	echo $delbrand;
             	  } 
             	 ?>
-                <h2>Category List</h2>
+                <h2>Brand List</h2>
                 <div class="block">        
                     <table class="data display datatable" id="example">
 					<thead>
 						<tr>
 							<th>Serial No.</th>
-							<th>Category Name</th>
+							<th>Brand Name</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php 
-						  $catlist = $cat->catList();
-						  if($catlist){
+						  $brandlist = $brand->brandList();
+						  if($brandlist){
 						  	$i=0;
-						  	while($allcat = $catlist->fetch_assoc()){
+						  	while($allbrand = $brandlist->fetch_assoc()){
 						  		$i++;
 						 ?>
 						<tr class="odd gradeX">
 							<td><?php echo $i; ?></td>
-							<td><?php echo $allcat['catName']; ?></td>
-							<td><a href="catedit.php?catid=<?php echo $allcat['catId']; ?>">Edit</a> || <a onclick="return confirm('Are You Sure To Delete!');" href="?delid=<?php echo $allcat['catId']; ?>">Delete</a></td>
+							<td><?php echo $allbrand['brandName']; ?></td>
+							<td><a href="brandedit.php?brandid=<?php echo $allbrand['brandId']; ?>">Edit</a> || <a onclick="return confirm('Are You Sure To Delete!');" href="?delid=<?php echo $allbrand['brandId']; ?>">Delete</a></td>
 						</tr>
 					    <?php } } else{ ?>
-					    	<p>No Category Available</p>
+					    	<p>No Brand Available</p>
 					    <?php } ?>
 					</tbody>
 				</table>

@@ -1,3 +1,7 @@
+<?php 
+  include '../lib/Session.php';
+  Session::checkSession();
+?>
 <?php
   header("Cache-Control: no-cache, must-revalidate");
   header("Pragma: no-cache"); 
@@ -34,26 +38,30 @@
 		    setSidebarHeight();
         });
     </script>
-
 </head>
 <body>
     <div class="container_12">
         <div class="grid_12 header-repeat">
             <div id="branding">
                 <div class="floatleft logo">
-                    <img src="img/livelogo.png" alt="Logo" />
+                    <img src="" alt="Logo" />
 				</div>
 				<div class="floatleft middle">
-					<h1>Training with live project</h1>
-					<p>www.trainingwithliveproject.com</p>
+					<h1>SkilledB E-commerce</h1>
+					<p>E-commerce built with PHP</p>
 				</div>
                 <div class="floatright">
                     <div class="floatleft">
                         <img src="img/img-profile.jpg" alt="Profile Pic" /></div>
+                    <?php
+                      if(isset($_GET['action']) && $_GET['action'] == 'logout'){
+                        Session::destroy();
+                      }
+                     ?>
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
-                            <li>Hello Admin</li>
-                            <li><a href="#">Logout</a></li>
+                            <li>Hello <?php echo Session::get("adminName"); ?></li>
+                            <li><a href="?action=logout">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -65,7 +73,7 @@
         </div>
         <div class="grid_12">
             <ul class="nav main">
-                <li class="ic-dashboard"><a href="index.php"><span>Dashboard</span></a> </li>
+                <li class="ic-dashboard"><a href="dashboard.php"><span>Dashboard</span></a> </li>
                 <li class="ic-form-style"><a href=""><span>User Profile</span></a></li>
 				<li class="ic-typography"><a href="changepassword.php"><span>Change Password</span></a></li>
 				<li class="ic-grid-tables"><a href="inbox.php"><span>Inbox</span></a></li>
